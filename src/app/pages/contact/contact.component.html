@@ -1,0 +1,60 @@
+<div class="container">
+  <h2 class="text-center m-3 fs-2">Contactanos</h2>
+  <mat-card class="m-2">
+    <form [formGroup]="formData" class="form" (ngSubmit)="submitData(formData.value)">
+      <div class="renglon">
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
+          <input
+            matInput
+            formControlName="name"
+            placeholder="Nombre"
+            type="text"/>
+        </mat-form-field>
+        <div class="mb-2 form-error" *ngIf="formData.get('name')?.hasError('required') && formData.get('name')?.touched && formData.get('name')?.invalid">
+          El Nombre es requerido
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            placeholder="Email"
+            type="email"
+          />
+        </mat-form-field>
+        <div class="mb-2 form-error" *ngIf="formData.get('email')?.hasError('required') && formData.get('email')?.touched && formData.get('email')?.invalid">
+          El formato de Email es incorrecto
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-label for="age">Edad</mat-label>
+          <input formControlName="age" matInput min="0" max="150" type="number" />
+        </mat-form-field>
+        <div class="mb-2 form-error" *ngIf="formData.get('age')?  && formData.get('age')?.touched && formData.get('age')?.invalid">
+          Debes ser mayor de edad
+        </div>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Consulta</mat-label>
+          <textarea
+            matInput
+            formControlName="description"
+            placeholder="Max 150 caracteres"
+            type="text"
+          >
+          Consulta</textarea
+          >
+        </mat-form-field>
+        <div class="btns">
+          <button
+            mat-raised-button
+            type="submit"
+            color="primary"
+            [disabled]= 'formData.invalid'>
+
+            Enviar
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

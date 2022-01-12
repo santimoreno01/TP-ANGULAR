@@ -1,0 +1,103 @@
+<div class="container">
+  <h2 class="text-center m-3 fs-2">Productos destacados</h2>
+  <div class="loanding" *ngIf="loanding">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="!loanding">
+    <div class="d-flex justify-content-center m-3">
+      <div id="carouselExampleDark" class="carousel carousel-dark slide w-100" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{products[outstandings[0]].image}}" class="d-block carousel-image" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{products[outstandings[1]].image}}" class="d-block carousel-image" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{products[outstandings[2]].image}}" class="d-block carousel-image" alt="...">
+          </div>
+        </div>  
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="m-3">
+      <div class="d-flex align-items-center m-3 ">
+        <h3 class="pt-3 tittle-products-list">Productos varios</h3>
+        <button mat-flat-button>
+          <i class="bi bi-sliders" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Filtros </i>
+        </button>
+      </div>
+      <div class="collapse" id="collapseExample">
+        <div class="card card-body filters">
+          <div class="filter d-grid w-50">
+            <label for="category" class="form-label">Categorias</label>
+            <select class="form-select" [(ngModel)]="categorySelected" name="category">
+              <option [selected] value="">Seleccione...</option>
+              <option *ngFor="let category of categories"[value]="category" >{{category}}</option>
+            </select>
+          </div>
+          <div class="filter price">
+            <div class="ipt-price d-grid">
+              <label for="minPrice" class="form-label">Precio Minimo</label>
+              <input id="minPrice" class="form-control input-price" value="{{minPrice}}">
+            </div>
+            <div class="ipt-price d-grid">
+              <label for="maxPrice" class="form-label">Precio Maximo</label>
+              <input id="maxPrice" class="form-control input-price" value="{{maxPrice}}">
+            </div>
+          </div>
+          <div>
+            <button mat-flat-button color="primary" class="btn-filter">Filtrar</button>
+          </div>
+        </div>
+      </div> 
+      <div class="row row-cols-2 row-cols-md-3 g-4">
+        <div *ngFor="let product of products" class="col">
+          <div class="card card-product pt-3">
+            <img src="{{product.image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{product.title}}</h5>
+              <p *ngIf="product.description.length < 170 else MoreDetail" class="card-text">{{product.description}}</p>
+              <ng-template #MoreDetail>
+                <p class="card-text">Mas detales...</p>
+              </ng-template>
+            </div>
+            <div class="card-footer">
+              <div>
+                <button class="icon-fav" mat-icon-button (click)="addFavorite(product)">
+                  <i *ngIf="inFavorites(product); else outsideFavorite" class="bi bi-heart-fill"></i>
+                  <ng-template #outsideFavorite>
+                    <i class="bi bi-heart"></i>
+                  </ng-template>
+                </button>
+              </div>
+              
+              <div class="price-product"> 
+                <span>$ {{product.price}}</span>
+              </div>
+
+              <div class="btn-buy">
+                <button mat-flat-button color="accent" (click)="addCart(product)">Agregar
+                  <mat-icon style="font-size: 1.2rem;">shopping_cart</mat-icon>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

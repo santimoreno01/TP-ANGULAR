@@ -1,0 +1,18 @@
+
+.renglon {
+flex-direction: column;
+justify-content: space-between;
+box-sizing: border-box;
+display: flex;
+padding: 20px 30px;
+
+.btns {
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+}
+}
+
+.form-error{
+    color: red;
+}
