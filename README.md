@@ -1,5 +1,9 @@
 # Trabajo Final Modulo Desarrollo Web Front End
 
+## Grupo
+  -Santiago Moreno Vilches
+  -Santiago Paez
+  
 ## Consignas
 
 Crear una app de Angular relacionada a una de las siguientes tematicas:
